@@ -26,6 +26,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {
+  
+})
+
 app.route('/').get((req, res) => {
   res.render('index', {title: 'Hello', message: 'Please log in'}); 
 });
