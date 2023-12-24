@@ -12,7 +12,7 @@ module.exports = function (app, myDataBase) {
   });
 
   app.route('/login').post(passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
-    res.redirect('/chat');
+    res.redirect('/profile');
   });
 
   app.route('/profile').get(ensureAuthenticated, (req,res) => {
