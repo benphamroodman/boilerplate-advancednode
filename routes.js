@@ -18,7 +18,7 @@ module.exports = function (app, myDataBase) {
 
   app.route('/profile').get(ensureAuthenticated, (req,res) => {
     //res.render('profile', { username: req.user.username });
-    res.sendFile(__dirname + "\\src\\profile.html", {username: req.user.username});
+    res.sendFile(__dirname + "\\src\\profile.html", {headers: {username: req.user.username}});
   });
 
   app.route('/logout').get((req, res) => {
