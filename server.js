@@ -30,6 +30,8 @@ app.use(session({
   store: store
 }));
 
+console.log(__dirname);
+
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -3,20 +3,22 @@ const bcrypt = require('bcrypt');
 
 module.exports = function (app, myDataBase) {
   app.route('/').get((req, res) => {
-    res.render('index', {
+    /*res.render('index', {
       title: 'Connected to Database',
       message: 'Please log in',
       showLogin: true,
       showRegistration: true
-    });
+    });*/
+    res.sendFile(__dirname + "\\src\\index.html", {headers: {title: 'Connected to Database', message: 'Please log in'}});
   });
 
   app.route('/login').post(passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
-    res.redirect('/profile');
+    res.redirect('/chat');
   });
 
   app.route('/profile').get(ensureAuthenticated, (req,res) => {
-    res.render('profile', { username: req.user.username });
+    //res.render('profile', { username: req.user.username });
+    res.sendFile(__dirname + "\\src\\profile.html", {username: req.user.username});
   });
 
   app.route('/logout').get((req, res) => {
@@ -56,7 +58,7 @@ module.exports = function (app, myDataBase) {
   );
 
   app.route('/chat').get(ensureAuthenticated, (req, res) => {
-    res.render('chat', {user: req.user});
+    res.sendFile(__dirname + "\\src\\chat.html", {headers: {user: req.user}});
   })
 
   app.use((req, res, next) => {
